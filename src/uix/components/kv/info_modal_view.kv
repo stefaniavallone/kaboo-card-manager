@@ -1,0 +1,26 @@
+<InfoModalView>
+    MDCard:
+        radius: [dp(25),]
+        orientation:'vertical'
+        spacing: dp(15)
+        padding: [dp(20), dp(20), dp(20), dp(20)]
+        MDBoxLayout:
+            adaptive_height: True
+            MDLabel:
+                text: "Information"
+                font_style: "H5"
+                bold: True
+            MDIconButton:
+                icon: "close"
+                on_release: root.dismiss()
+
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            MDLabel:
+                text: root.text
+                text_size: self.width, None
+                size_hint: 1, None
+                height: self.texture_size[1]
+                markup: True
+

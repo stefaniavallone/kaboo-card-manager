@@ -1,0 +1,151 @@
+#:import GameCard uix.components.game_card
+
+
+<GameCardListItem>
+    text: root.word
+    IconLeftWidget:
+        icon: root.icon
+    IconRightWidget:
+        icon: "close"
+        on_release: root.remove()
+
+<GameCardGridItem>
+    word: ""
+    forbidden: ""
+    MDCard:
+        radius: dp(10)
+        elevation: 0
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: [dp(5), dp(5), dp(5), dp(5)]
+            spacing: dp(10)
+            MDLabel:
+                adaptive_height: True
+                text: root.word
+                halign: "center"
+                bold: True
+            MDLabel:
+                size_hint_y: 0.7
+                halign: "center"
+                text: root.forbidden
+
+    MDIconButton:
+        theme_text_color: "Custom"
+        text_color: 0.9, 0.1, 0.1, 1
+        x: root.width - sp(12) - self.width / 2
+        y: root.height - sp(12) - self.height / 2
+        user_font_size: "24sp"
+        icon: "close-circle"
+        on_release: root.remove()
+
+<CardHandlerScreen>
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDBoxLayout:
+            md_bg_color: app.theme_cls.primary_color
+            adaptive_height: True
+            padding: dp(20), dp(10), dp(20), dp(10)
+            spacing: dp(20)
+            MDLabel:
+                text: root.file_path
+            MDLabel:
+                adaptive_width: True
+                text: root.files_number
+                halign: "right"
+                bold: True
+            MDIconButton:
+                icon: 'information'
+                on_release: root.show_information()
+
+        MDSeparator:
+
+        MDBoxLayout:
+            size_hint_y: 0.9
+            padding: dp(10)
+            MDBoxLayout:
+                orientation: 'vertical'
+                spacing: dp(10)
+                padding: dp(10)
+                size_hint_x: 0.7
+
+                MDBoxLayout:
+                    adaptive_height: True
+                    spacing: dp(10)
+
+                    MDIconButton:
+                        icon: 'magnify'
+
+                    MDTextField:
+                        id: search_field
+                        hint_text: 'Search card'
+                        on_text: root._set_cards()
+
+                    MDDropDownItem:
+                        id: drop_item
+                        pos_hint: {'center_x': .5, 'center_y': .5}
+                        text: "ALL CARDS"
+                        on_release: root.menu.open()
+
+                    MDFlatButton:
+                        id: view_changer
+                        text: "GRID VIEW"
+                        on_release: root.toggle_grid()
+
+                RecycleView:
+                    id: list_view
+                    key_viewclass: 'viewclass'
+                    key_size: 'height'
+
+                    RecycleBoxLayout:
+                        padding: dp(10)
+                        default_size: None, dp(48)
+                        default_size_hint: 1, None
+                        size_hint_y: None
+                        height: self.minimum_height
+                        orientation: 'vertical'
+
+                RecycleView:
+                    id: grid_view
+                    key_viewclass: 'viewclass'
+                    key_size: 'height'
+
+                    RecycleGridLayout:
+                        padding: dp(10)
+                        spacing: dp(10)
+                        cols: 6
+                        default_size: None, dp(200)
+                        default_size_hint: 1, None
+                        size_hint_y: None
+                        height: self.minimum_height
+                        #orientation: 'vertical'
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 0.3
+                GameCard:
+                    id: selected_card
+                    update_callback: root.update_card
+
+        MDSeparator:
+
+        MDBoxLayout:
+            padding: dp(20), dp(10), dp(20), dp(10)
+            spacing: dp(10)
+            adaptive_height: True
+            size_hint_x: 1
+            MDLabel:
+                text: "INSERT CARD:"
+                size_hint_x: None
+                width: dp(160)
+            MDTextField:
+                id: insert_input
+                color_mode: 'custom'
+                line_color_focus: 0.3, 0.3, 0.3, 1
+                size_hint_x: 0.6
+                hint_text: 'Format: word; forb1, forb2, forb3, forb4, forb5'
+            MDFillRoundFlatIconButton:
+                pos_hint: {'center_x': .5}
+                text: "Insert"
+                icon: "plus"
+                on_release: root.insert_card(insert_input.text)
+

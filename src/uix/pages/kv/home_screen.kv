@@ -1,0 +1,70 @@
+<HomeScreen>
+
+    MDRelativeLayout:
+        MDBoxLayout:
+            id: logo_container
+            orientation:"vertical"
+            size_hint_y: .3
+            pos_hint: {"center_x": .5, "center_y": .85}
+            Image:
+                source: 'assets/logo.png'
+                keep_ratio: True
+                opacity: 1
+            MDLabel:
+                adaptive_height: True
+                halign: "center"
+                font_style: "H5"
+                bold: True
+                text: "Card Manager"
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'center_x': .5, 'center_y': .4}
+            size_hint: 0.5, 0.4
+            spacing: dp(20)
+            MDBoxLayout:
+                spacing: dp(20)
+                MDCard:
+                    ripple_behavior: True
+                    radius: dp(25)
+                    on_release: root.file_manager_open()
+                    MDBoxLayout:
+                        adaptive_height: True
+                        orientation: 'vertical'
+                        pos_hint: {'center_x': .5, 'center_y': .5}
+                        MDIcon:
+                            font_size: "48sp"
+                            halign: "center"
+                            icon: "folder"
+                        MDLabel:
+                            halign: "center"
+                            text: "Open FileManager"
+
+                MDCard:
+                    ripple_behavior: True
+                    radius: dp(25)
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    on_release: root.create_new_file()
+                    MDBoxLayout:
+                        adaptive_height: True
+                        orientation: 'vertical'
+                        pos_hint: {'center_x': .5, 'center_y': .5}
+                        MDIcon:
+                            font_size: "48sp"
+                            halign: "center"
+                            icon: "plus"
+                        MDLabel:
+                            halign: "center"
+                            text: "New File"
+
+            MDFillRoundFlatIconButton:
+                pos_hint: {'center_x': .5}
+                text: "INFO"
+                icon: "information"
+                on_release: root.show_information()
+
+        MDLabel:
+            halign: "center"
+            pos_hint: {"center_y": .02}
+            text: "App version: " + root.version
+            font_style: "Overline"

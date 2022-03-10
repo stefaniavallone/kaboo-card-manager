@@ -1,0 +1,27 @@
+<GameCard>
+    radius: [dp(25),]
+    MDBoxLayout:
+        orientation:'vertical'
+        padding: [dp(10), dp(10), dp(10), dp(10)]
+        spacing: dp(15)
+        MDLabel:
+            text: root.word
+            halign: "center"
+            bold: True
+            font_style: "H4"
+
+        MDBoxLayout:
+            padding: dp(20)
+            id: forbidden_container
+            orientation: 'vertical'
+
+        MDBoxLayout:
+            id: controls
+            adaptive_height: True
+            padding: dp(20)
+            MDFlatButton:
+                text: "ADD FORBIDDEN"
+                on_release: root.add_forbidden()
+            MDFlatButton:
+                text: "SAVE"
+                on_release: root.save()

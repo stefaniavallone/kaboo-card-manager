@@ -1,0 +1,3 @@
+# Kivy
+kivy[base] @ https://github.com/kivy/kivy/archive/master.zip
+kivymd==0.104.2

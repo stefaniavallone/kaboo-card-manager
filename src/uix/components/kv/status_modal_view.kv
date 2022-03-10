@@ -1,0 +1,29 @@
+<StatusModalView>
+    MDCard:
+        radius: [dp(25),]
+        orientation:'vertical'
+        spacing: dp(15)
+        padding: [dp(20), dp(20), dp(20), dp(20)]
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            md_bg_color: 0, 0, 0, 0
+            spacing: dp(20)
+            padding: dp(20)
+            MDIcon:
+                theme_text_color: "Custom"
+                text_color: root.text_color
+                halign: "center"
+                font_size: "72sp"
+                icon: root.icon
+            MDLabel:
+                adaptive_height: True
+                halign: "center"
+                text: root.text
+                font_style: "H6"
+            MDLabel:
+                adaptive_height: True
+                halign: "center"
+                font_style: "Caption"
+                text: root.subtext
+
