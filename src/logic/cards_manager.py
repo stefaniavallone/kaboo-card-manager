@@ -11,8 +11,8 @@ class CardsManager(dict):
     def _read_file(self):
         with open(self.path_file, 'r') as file:
             elements = json.load(file)
-        for element in elements:
-            self[element["word"].lower()] = [f.lower() for f in element["forbidden"]]
+        for key, value in elements.items():
+            self[key.lower()] = [f.lower() for f in value]
 
     def update_card(self, word, forbidden):
         self[word.lower()] = [f.lower().strip() for f in forbidden]
@@ -36,8 +36,7 @@ class CardsManager(dict):
 
     def save(self):
         with open(self.path_file, 'w', encoding='utf-8') as f:
-            json.dump([{"word": k, "forbidden": v} for k, v in self.items()],
-                      f, indent=4)
+            json.dump({word: forbidden for word, forbidden in self.items()}, f, indent=4)
 
     def filter(self, filter_funct=""):
         if filter_funct == "<5 VALUES":
